@@ -14,8 +14,8 @@
     { "src": "/(.*)", "dest": "/packages/frontend/$1" }
   ],
   "alias": [
-    "international-project-ephec.now.sh",
-    "www.international-project-ephec.now.sh"
+    "ephec.blazingly.io",
+    "www.ephec.blazingly.io"
   ],
   "env": {
     "DYNAMODB_TABLE": "international-project",
