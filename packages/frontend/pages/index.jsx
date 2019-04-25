@@ -10,30 +10,37 @@ import "./style.scss";
 class Index extends React.Component {
   static async getInitialProps({ query }) {
     try {
-      let locations = await axios.get(API_URL + "/location", {
+      let locations = (await axios.get(API_URL + "/location", {
         headers: {
           Accept: "application/json"
         }
-      });
+      })).data;
 
-      let animals = await axios.get(API_URL + "/animal", {
+      let animals = (await axios.get(API_URL + "/animal", {
         headers: {
           Accept: "application/json"
         }
-      });
+      })).data;
 
-      return { locations: locations.data, animals: animals.data };
+      return {
+        locations,
+        animals,
+        animalsMap: animals.reduce((acc, curr) => {
+          acc[curr.id] = curr;
+          return acc;
+        }, {})
+      };
     } catch (e) {
       console.error(e);
       console.log(e.response);
-      return { locations: null, animals: null };
+      return { locations: null, animals: null, animalsMap };
     }
   }
 
   render() {
-    let { locations, animals } = this.props;
+    let { locations, animals, animalsMap } = this.props;
 
-    if (!locations || !animals) return null;
+    if (!locations || !animals || !animalsMap) return null;
 
     return (
       <div>
@@ -43,7 +50,12 @@ class Index extends React.Component {
           lng={locations[0].lng}
           lat={locations[0].lat}
           zoom={10}
-          points={locations}
+          points={locations
+            .map(loc => {
+              loc.animal = animalsMap[loc.sensor_id];
+              return loc;
+            })
+            .filter(loc => !!loc.animal)}
         />
       </div>
     );

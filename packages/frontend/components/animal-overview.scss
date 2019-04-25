@@ -1,17 +1,17 @@
 .animal-overview {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  display: flex;
 
-  margin: 20px;
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
 }
 
 .animal {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
   display: flex;
+
+  list-style: none;
+  margin: 0 20px;
+  padding: 0;
 
   .animal-name {
     font-size: 1rem;

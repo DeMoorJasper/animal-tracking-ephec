@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import css from "./animal-overview.scss";
+import { getAnimalPhoto } from "../utils/animal";
 
 export default class AnimalOverview extends React.Component {
   render() {
@@ -10,8 +11,8 @@ export default class AnimalOverview extends React.Component {
       <ul className={css["animal-overview"]}>
         {animals.map(animal => {
           return (
-            <li className={css["animal"]}>
-              <img className={css["image"]} src="/static/fox.png" />
+            <li className={css["animal"]} key={animal.id}>
+              <img className={css["image"]} src={getAnimalPhoto(animal)} />
               <h3 className={css["animal-name"]}>{animal.name}</h3>
             </li>
           );

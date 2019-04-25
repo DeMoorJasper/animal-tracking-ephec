@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import css from "./map.scss";
 
+import { getAnimalPhoto } from "../utils/animal";
+
 let mapboxgl = {};
 if (typeof window !== "undefined") {
   mapboxgl = require("mapbox-gl");
@@ -9,6 +11,16 @@ if (typeof window !== "undefined") {
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
+
+async function loadMapImage(map, image, imageName) {
+  await new Promise((resolve, reject) => {
+    map.loadImage(image, function(error, image) {
+      if (error) return reject(error);
+      map.addImage(imageName, image);
+      resolve();
+    });
+  });
+}
 
 export default class ReactMap extends React.Component {
   componentDidMount() {
@@ -23,33 +35,70 @@ export default class ReactMap extends React.Component {
       zoom
     });
 
-    https: map.on("load", function() {
-      map.loadImage("/static/fox.png", function(error, image) {
-        if (error) throw error;
-        map.addImage("fox", image);
-        map.addLayer({
-          id: "points",
-          type: "symbol",
-          source: {
-            type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: points.map(point => {
-                return {
-                  type: "Feature",
-                  geometry: {
-                    type: "Point",
-                    coordinates: [point.lng, point.lat]
-                  }
-                };
-              })
-            }
-          },
-          layout: {
-            "icon-image": "fox",
-            "icon-size": 0.05
+    map.on("load", async function() {
+      async function initMapImages() {
+        await loadMapImage(map, "/static/fox.png", "fox");
+        await loadMapImage(map, "/static/bird.png", "bird");
+      }
+
+
+      await initMapImages();
+
+      let foxPoints = points.filter(
+        point => point.animal.animal_type === "fox"
+      );
+      let birdPoints = points.filter(
+        point => point.animal.animal_type === "bird"
+      );
+
+      console.log({ foxPoints, birdPoints });
+
+      map.addLayer({
+        id: "bird-points",
+        type: "symbol",
+        source: {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: birdPoints.map(point => {
+              return {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: [point.lng, point.lat]
+                }
+              };
+            })
           }
-        });
+        },
+        layout: {
+          "icon-image": "bird",
+          "icon-size": 0.02
+        }
+      });
+
+      map.addLayer({
+        id: "fox-points",
+        type: "symbol",
+        source: {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: foxPoints.map(point => {
+              return {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: [point.lng, point.lat]
+                }
+              };
+            })
+          }
+        },
+        layout: {
+          "icon-image": "fox",
+          "icon-size": 0.05
+        }
       });
     });
   }
