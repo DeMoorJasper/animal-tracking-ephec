@@ -10,7 +10,7 @@ let server = http.createServer(function(req, res, next) {
   try {
     let middlewareFunction = null;
     try {
-      middlewareFunction = require(`./${functionName}/index.js`);
+      middlewareFunction = require(`./endpoints/${functionName}/index.js`);
     } catch (e) {
       console.error(e);
       res.statusCode = 404;
