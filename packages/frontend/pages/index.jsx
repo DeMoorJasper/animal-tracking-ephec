@@ -37,7 +37,7 @@ class Index extends React.Component {
 
     return (
       <div>
-        <Heading>The Foxy Fox Tracker (and anything else...)</Heading>
+        <Heading>Animals be Trackin'</Heading>
         <AnimalOverview animals={animals} />
         <Map
           lng={locations[0].lng}
