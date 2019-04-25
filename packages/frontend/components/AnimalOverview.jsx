@@ -13,7 +13,7 @@ export default class AnimalOverview extends React.Component {
           return (
             <li className={css["animal"]} key={animal.id}>
               <img className={css["image"]} src={getAnimalPhoto(animal)} />
-              <h3 className={css["animal-name"]}>{animal.name}</h3>
+              <h2 className={css["animal-name"]}>{animal.name}</h2>
             </li>
           );
         })}
