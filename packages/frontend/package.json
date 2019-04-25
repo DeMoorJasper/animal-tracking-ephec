@@ -1,0 +1,21 @@
+{
+  "name": "international-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "next",
+    "build": "next build",
+    "start:server": "next start",
+    "now-build": "next build"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "mapbox-gl": "^0.53.1",
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "@zeit/next-sass": "^1.0.1",
+    "node-sass": "^4.11.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "DYNAMODB_TABLE=international-project node ./server.js"
+  },
+  "dependencies": {
+    "@ephec-project/db": "^1.0.0",
+    "body-parser": "^1.18.3"
+  }
+}
