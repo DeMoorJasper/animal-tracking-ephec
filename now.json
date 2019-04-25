@@ -9,6 +9,10 @@
       "config": { "maxLambdaSize": "10mb" }
     }
   ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/packages/api/endpoints/$1" },
+    { "src": "/(.*)", "dest": "/packages/frontend/$1" }
+  ],
   "alias": [
     "international-project.jasperdemoor.now.sh",
     "www.international-project.jasperdemoor.now.sh"
