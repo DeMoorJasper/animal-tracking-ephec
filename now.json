@@ -13,14 +13,12 @@
     { "src": "/api/(.*)", "dest": "/packages/api/endpoints/$1" },
     { "src": "/(.*)", "dest": "/packages/frontend/$1" }
   ],
-  "alias": [
-    "ephec.blazingly.io",
-    "www.ephec.blazingly.io"
-  ],
+  "alias": ["ephec.blazingly.io", "www.ephec.blazingly.io"],
   "env": {
     "DYNAMODB_TABLE": "international-project",
     "ZEIT_AWS_REGION": "eu-central-1",
     "ZEIT_AWS_ACCESS_KEY_ID": "@aws_access_key",
-    "ZEIT_AWS_SECRET_ACCESS_KEY": "@aws_secret"
+    "ZEIT_AWS_SECRET_ACCESS_KEY": "@aws_secret",
+    "API_URL": "https://ephec.blazingly.io/api"
   }
 }

@@ -1,0 +1,38 @@
+.animal-overview {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  margin: 20px;
+}
+
+.animal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+
+  .animal-name {
+    font-size: 1rem;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+  }
+
+  .animal-type {
+    font-size: 1rem;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    margin-right: 10px;
+  }
+
+  .image {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 10px;
+  }
+}

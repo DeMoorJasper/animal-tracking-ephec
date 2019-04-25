@@ -3,7 +3,7 @@ const uuidv4 = require("uuid/v4");
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-const TABLE_TYPE = "location";
+const TABLE_TYPE = "animal";
 
 async function getAll() {
   let params = {
@@ -26,10 +26,10 @@ async function getAll() {
   return result.Items;
 }
 
-async function add(locationData) {
+async function add(animalData) {
   let params = {
     TableName: process.env.DYNAMODB_TABLE,
-    Item: Object.assign({ type: TABLE_TYPE, id: uuidv4() }, locationData)
+    Item: Object.assign({ type: TABLE_TYPE, id: uuidv4() }, animalData)
   };
 
   return dynamoDb.put(params).promise();

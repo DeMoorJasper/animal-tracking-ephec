@@ -1,4 +1,4 @@
-const location = require("@ephec-project/db/location");
+const animal = require("@ephec-project/db/animal");
 const bodyParser = require("body-parser");
 
 const API_KEY = "q9834t812gr0891gr091br089g190rbhq98gr509qbg890gr9g";
@@ -21,14 +21,16 @@ async function middleware(req, res) {
       return;
     }
 
-    await location.add(req.body)
+    console.log(req.body);
+
+    await animal.add(req.body)
 
     res.end("ok");
   } else {
     try {
-      let locations = await location.getAll();
+      let animals = await animal.getAll();
       res.statusCode = 200;
-      res.end(JSON.stringify(locations));
+      res.end(JSON.stringify(animals));
     } catch (e) {
       console.error(e);
       res.statusCode = 500;
