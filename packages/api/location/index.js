@@ -22,6 +22,8 @@ async function middleware(req, res) {
     }
 
     console.log(req.body);
+
+    res.end("ok");
   } else {
     try {
       let locations = await location.getAll();
