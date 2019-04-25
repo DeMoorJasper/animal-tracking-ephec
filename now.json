@@ -9,7 +9,10 @@
       "config": { "maxLambdaSize": "10mb" }
     }
   ],
-  "alias": ["ephec.now.sh", "www.ephec.now.sh"],
+  "alias": [
+    "international-project.jasperdemoor.now.sh",
+    "www.international-project.jasperdemoor.now.sh"
+  ],
   "env": {
     "DYNAMODB_TABLE": "international-project",
     "ZEIT_AWS_REGION": "eu-central-1",
