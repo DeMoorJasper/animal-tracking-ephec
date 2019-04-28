@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "aws-sdk": "^2.442.0",
     "uuid": "^3.3.2"
