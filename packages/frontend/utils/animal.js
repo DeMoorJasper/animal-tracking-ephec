@@ -1,4 +1,3 @@
-
 export function getAnimalPhoto(animal) {
   switch (animal.animal_type) {
     case "fox":
