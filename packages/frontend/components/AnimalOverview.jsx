@@ -16,6 +16,10 @@ export default class AnimalOverview extends React.Component {
               className={css["animal"]}
               key={animal.id}
               onClick={() => {
+                if (selectedAnimal && selectedAnimal.id === animal.id) {
+                  return setSelectedAnimal(null);
+                }
+
                 setSelectedAnimal(animal);
               }}
             >
