@@ -11,12 +11,13 @@
     "now-build": "next build"
   },
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "mapbox-gl": "^0.53.1",
     "next": "^8.1.0",
+    "node-sass": "^4.11.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "@zeit/next-sass": "^1.0.1",
-    "node-sass": "^4.11.0"
+    "react-dom": "^16.8.6"
   }
 }

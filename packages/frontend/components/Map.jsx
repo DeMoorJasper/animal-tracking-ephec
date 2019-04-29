@@ -43,10 +43,13 @@ export default class ReactMap extends React.Component {
     };
 
     this.map = null;
+    this.updating = false;
   }
 
   updateMapLayers() {
     const { points } = this.props;
+
+    this.updating = true;
 
     let animalPointsMap = {};
     for (let point of points) {
@@ -120,13 +123,15 @@ export default class ReactMap extends React.Component {
       mapLayers.push(`${animalId}-last-location`);
     }
 
-    this.setState({ mapLayers: mapLayers });
+    this.setState({ mapLayers: mapLayers }, () => (this.updating = false));
   }
 
   componentDidMount() {
     if (!mapboxgl) return;
-
+    
     const { lng, lat, zoom } = this.props;
+
+    this.updating = true;
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -147,7 +152,7 @@ export default class ReactMap extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.map || prevProps === this.props) return;
+    if (!this.map || prevProps === this.props || this.updating) return;
 
     for (let layer of this.state.mapLayers) {
       this.map.removeLayer(layer);

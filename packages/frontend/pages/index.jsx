@@ -56,26 +56,13 @@ class Index extends React.Component {
       return acc;
     }, {});
 
-    console.log(locations
-      .map(loc => {
-        loc.animal = animalsMap[loc.sensor_id];
-        return loc;
-      })
-      .filter(
-        loc =>
-          !(
-            !loc.animal ||
-            (this.state.selectedAnimal &&
-              loc.animal.id !== this.state.selectedAnimal.id)
-          )
-      ));
-
     return (
       <div>
         <Heading>Animals be Trackin'</Heading>
         <AnimalOverview
           animals={animals}
           setSelectedAnimal={this.setSelectedAnimal}
+          selectedAnimal={this.state.selectedAnimal}
         />
 
         <Map

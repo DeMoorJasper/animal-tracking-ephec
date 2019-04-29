@@ -1,11 +1,12 @@
 import React from "react";
+import classNames from "classnames";
 import ReactDOM from "react-dom";
 import css from "./animal-overview.scss";
 import { getAnimalPhoto } from "../utils/animal";
 
 export default class AnimalOverview extends React.Component {
   render() {
-    const { animals, setSelectedAnimal } = this.props;
+    const { animals, selectedAnimal, setSelectedAnimal } = this.props;
 
     return (
       <ul className={css["animal-overview"]}>
@@ -19,7 +20,13 @@ export default class AnimalOverview extends React.Component {
               }}
             >
               <img className={css["image"]} src={getAnimalPhoto(animal)} />
-              <h2 className={css["animal-name"]}>{animal.name}</h2>
+              <h2
+                className={classNames(css["animal-name"], {
+                  [css["is-selected"]]: selectedAnimal && animal.id === selectedAnimal.id
+                })}
+              >
+                {animal.name}
+              </h2>
             </li>
           );
         })}
