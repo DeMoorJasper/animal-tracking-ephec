@@ -24,28 +24,60 @@ class Index extends React.Component {
 
       return {
         locations,
-        animals,
-        animalsMap: animals.reduce((acc, curr) => {
-          acc[curr.id] = curr;
-          return acc;
-        }, {})
+        animals
       };
     } catch (e) {
       console.error(e);
       console.log(e.response);
-      return { locations: null, animals: null, animalsMap };
+      return { locations: null, animals: null };
     }
   }
 
-  render() {
-    let { locations, animals, animalsMap } = this.props;
+  constructor(props) {
+    super(props);
 
-    if (!locations || !animals || !animalsMap) return null;
+    this.state = {
+      selectedAnimal: null
+    };
+
+    this.setSelectedAnimal = this.setSelectedAnimal.bind(this);
+  }
+
+  setSelectedAnimal(selectedAnimal) {
+    this.setState({ selectedAnimal });
+  }
+
+  render() {
+    let { locations, animals } = this.props;
+
+    if (!locations || !animals) return null;
+    let animalsMap = animals.reduce((acc, curr) => {
+      acc[curr.id] = curr;
+      return acc;
+    }, {});
+
+    console.log(locations
+      .map(loc => {
+        loc.animal = animalsMap[loc.sensor_id];
+        return loc;
+      })
+      .filter(
+        loc =>
+          !(
+            !loc.animal ||
+            (this.state.selectedAnimal &&
+              loc.animal.id !== this.state.selectedAnimal.id)
+          )
+      ));
 
     return (
       <div>
         <Heading>Animals be Trackin'</Heading>
-        <AnimalOverview animals={animals} />
+        <AnimalOverview
+          animals={animals}
+          setSelectedAnimal={this.setSelectedAnimal}
+        />
+
         <Map
           lng={locations[0].lng}
           lat={locations[0].lat}
@@ -55,7 +87,14 @@ class Index extends React.Component {
               loc.animal = animalsMap[loc.sensor_id];
               return loc;
             })
-            .filter(loc => !!loc.animal)}
+            .filter(
+              loc =>
+                !(
+                  !loc.animal ||
+                  (this.state.selectedAnimal &&
+                    loc.animal.id !== this.state.selectedAnimal.id)
+                )
+            )}
         />
       </div>
     );
